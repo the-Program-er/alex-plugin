@@ -3,6 +3,7 @@
 const SizePlugin = require('size-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 const PATHS = require('./paths');
 
@@ -30,6 +31,10 @@ const common = {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader'
+      },
       // Check for images imported in .js files and
       {
         test: /\.(png|jpe?g|gif)$/i,
@@ -39,6 +44,28 @@ const common = {
             options: {
               outputPath: 'images',
               name: '[name].[ext]',
+            },
+          },
+        ],
+      },
+      {
+        test: /\.s(c|a)ss$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            // Requires sass-loader@^7.0.0
+            options: {
+              implementation: require('sass'),
+              indentedSyntax: true // optional
+            },
+            // Requires >= sass-loader@^8.0.0
+            options: {
+              implementation: require('sass'),
+              sassOptions: {
+                indentedSyntax: true // optional
+              },
             },
           },
         ],
@@ -61,6 +88,7 @@ const common = {
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
+    new VueLoaderPlugin()
   ],
 };
 

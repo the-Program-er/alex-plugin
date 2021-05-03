@@ -2,6 +2,48 @@
 
 import './popup.css';
 
+import Vue from 'vue' 
+import vuetify from './plugins/vuetify' 
+import App from './App.vue'
+
+new Vue({
+  vuetify,
+  el: '#app',
+  render: h => h(App)
+}).$mount('#app')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+console.log('Popup.js END')
+
+
+
+
+/*
 (function() {
   // We will make use of Storage API to get and store `count` value
   // More information on Storage API can we found at
@@ -110,3 +152,4 @@ import './popup.css';
     }
   );
 })();
+*/
